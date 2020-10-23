@@ -35,14 +35,14 @@ class Router {
                         // 3. What to do if packet has reached destination?
                         // We should end.
                         console.log("Here you need to get it to end");
-                        res.end(JSON.stringify({msg: "Packet reached destination"}));
+                        res.end(packet.prettyPrint());
                     }
 
                     // 4. Get which router to forwardTo.
                     // Hint: there's a method in packet, that gets the next router.
                     // Hint: should be an int.
-                    let Rrouter = packet.destination;
-                    let forwardTo = Rrouter.shift();
+
+                    let forwardTo = packet.popShortestPath();
                     console.log(forwardTo.destination);
 
                     // get the connection object (routeTo).
@@ -50,13 +50,13 @@ class Router {
                     let routeTo = self.getRouteTo(forwardTo);
                     // 5. decrement the packets ttl.
 
+                    packet.ttl = parseInt(packet.ttl-1);
                     // 6. Add an extra field to routeTo named ttl with same value as the packet's ttl.
                     // remember the object notation of objects in javascript.
-                    routeTo.push(packet.ttl)
+                    routeTo.ttl = packet.ttl;
 
                     // 7. Finish the if statement.
-                    if (packet.ttl < 4) {
-
+                    if (packet.ttl > 3) {
                         res.end(JSON.stringify({msg: "packed dropped due to ttl"}))
                         return;
                     }
@@ -68,16 +68,15 @@ class Router {
 
                     // 9. forward the packet to the forwardTo variable.
                     // again look at the packet's methods.
+                    let sourceRouter = ports.query("router"+ forwardTo)[0];
+                    packet.forwardPacket(sourceRouter.port)
                 }
-              else
-                {
+              else {
                     res.end("No data received");
                 }
             })
 
         })
-
-
 
         this.port = ports.register("router" + this.name);
         console.log(ports.query("router" + this.name));
@@ -96,7 +95,7 @@ class Router {
         return found;
     }
 
-     updateConnections(connections) {
+     updateConnections(connections){
         this.connections = this.connections;
     }
 }
