@@ -85,6 +85,7 @@ const getShortestPath = (graph, from, to)  => {
             sp.push(e.to());
         }
         console.log(sp);
+        return(sp);
     }
     catch(e){
         console.log("Error: Path not found")

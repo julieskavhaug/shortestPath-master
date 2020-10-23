@@ -26,7 +26,7 @@ class Router {
 
 
                     //2. reconstructing packet from data
-                    let packet = new Packet(id, source, destination, ttl);
+                    let packet = new Packet(obj.id, obj.source, obj.destination, obj.ttl);
 
                     // console.log("Packet " + packet.id + " received at router " + self.name);
                     console.log("packet" + packet.id + "received at router " + self.name)
