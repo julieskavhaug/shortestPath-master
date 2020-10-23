@@ -21,7 +21,7 @@ class Router {
             req.on('end', () => {
                 if (data.length > 0) {
                     //1. decipher data. hint: JSON.parse()
-                    let obj = JSON.parse(data[i]);
+                    let obj = JSON.parse(data);
                     console.log(obj);
 
 

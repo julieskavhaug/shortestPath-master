@@ -49,7 +49,6 @@ class Packet{
     }
 
     forwardPacket(to) {
-        console.log(ports.query());
         let sourceRouter = ports.query("router"+to)[0];
         var host = sourceRouter.host.split(":").reverse()[0];
         var port = sourceRouter.port;

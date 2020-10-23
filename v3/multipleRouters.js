@@ -37,7 +37,6 @@ const multipleRouters = () => {
         r.connections.forEach(c => {
             graph.addEdge(new jsgraphs.Edge(r.router, c.to, c.cost))
         })
-        console.log("This works")
     });
 
     /**
