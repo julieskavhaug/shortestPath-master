@@ -20,7 +20,7 @@ const multipleRouters = () => {
 
         // add to array
         routers.push(r);
-    })
+    });
 
 
 
@@ -37,6 +37,7 @@ const multipleRouters = () => {
         r.connections.forEach(c => {
             graph.addEdge(new jsgraphs.Edge(r.router, c.to, c.cost))
         })
+        console.log("This works")
     });
 
     /**
@@ -53,7 +54,7 @@ const multipleRouters = () => {
     let demoPacket = new Packet(id, source, destination, ttl);
     // Add the shortest path to the packet.
     demoPacket.shortestPath = getShortestPath(graph, demoPacket.source, demoPacket.destination);
-
+    console.log("This as well");
     /**
      * Prompt is a package to prompt the user though the terminal.
      * Can be found here: https://github.com/flatiron/prompt#readme

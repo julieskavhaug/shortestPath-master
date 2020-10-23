@@ -34,7 +34,9 @@ const oneRouter = () => {
 }
 
 const sendInitialPacket = (to, body) => {
+    console.log("router " + to);
     let sourceRouter = ports.query("router"+to)[0];
+    console.log(sourceRouter);
     var host = sourceRouter.host.split(":").reverse()[0];
     var port = sourceRouter.port;
     /**
